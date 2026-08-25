@@ -13,7 +13,6 @@ const env = {
   supos: {
     apiUrl: process.env.SUPOS_API_URL || '',
     apiKey: process.env.SUPOS_API_KEY || '',
-    mqttUrl: process.env.SUPOS_MQTT_URL || undefined,
   },
   umh: {
     brokers: (process.env.UMH_BROKERS || '').split(',').filter(Boolean),
@@ -32,7 +31,6 @@ async function getAdapter(provider) {
       suposAdapter = new mod.SuposAdapter({
         apiUrl: env.supos.apiUrl,
         apiKey: env.supos.apiKey,
-        mqttUrl: env.supos.mqttUrl,
         timeoutMs: 15000,
         writeField: 'value',
       })
