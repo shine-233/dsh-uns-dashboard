@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DSH·UNS 控制台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<div class="scanlines" aria-hidden="true"></div>
+
+<header class="topbar boot" style="--d: 0">
+  <div class="brand">
+    <span class="brand-mark">▚</span>
+    <h1>DSH·UNS <em>控制台</em></h1>
+  </div>
+  <div class="conn">
+    <span id="provider-pill" class="pill">—</span>
+    <span class="led-wrap"><i id="conn-led" class="led"></i><label id="conn-text">连接中</label></span>
+    <time id="clock" class="mono">--:--:--</time>
+  </div>
+</header>
+
+<main class="layout">
+  <aside class="tree-panel boot" style="--d: 1">
+    <header class="panel-head">
+      <h2>命名空间</h2>
+      <input id="tree-filter" type="search" placeholder="过滤路径…" autocomplete="off" />
+    </header>
+    <nav id="tree" class="tree" aria-label="UNS 树"></nav>
+    <footer class="tree-hint">点击位号加入监视 · 再次点击移除</footer>
+  </aside>
+
+  <section class="stage">
+    <article id="tag-card" class="tag-card boot" style="--d: 2" data-empty="true">
+      <div class="eyebrow" id="active-path">未选择位号</div>
+      <div class="reading">
+        <span id="active-value" class="value mono">——</span>
+        <span id="active-unit" class="unit"></span>
+      </div>
+      <div class="meta">
+        <span id="active-ts" class="mono dim">--</span>
+        <span id="series-count" class="dim"></span>
+      </div>
+    </article>
+
+    <article class="chart-panel boot" style="--d: 3">
+      <header class="panel-head">
+        <h2>实时曲线</h2>
+        <div class="range-row">
+          <button class="ghost range-btn" data-range="3600000">1时</button>
+          <button class="ghost range-btn" data-range="21600000">6时</button>
+          <button class="ghost range-btn" data-range="86400000">24时</button>
+          <button id="live-btn" class="ghost is-active">实时</button>
+        </div>
+      </header>
+      <canvas id="chart" aria-label="实时数据曲线"></canvas>
+    </article>
+
+    <article class="ops-row boot" style="--d: 4">
+      <button id="write-btn" class="solid" disabled>写值…</button>
+      <button id="clear-btn" class="ghost">清空监视</button>
+      <span class="legend" id="legend"></span>
+    </article>
+
+    <article class="log-panel boot" style="--d: 5">
+      <header class="panel-head"><h2>事件记录</h2></header>
+      <ol id="log" class="log mono"></ol>
+    </article>
+  </section>
+</main>
+
+<dialog id="write-dialog">
+  <form method="dialog" id="write-form">
+    <h3>写入值</h3>
+    <p class="mono target" id="write-target">/…</p>
+    <label>数值<input id="write-input" name="value" type="text" inputmode="decimal" placeholder="如 72.5" required /></label>
+    <menu>
+      <button type="button" value="cancel" class="ghost">取消</button>
+      <button type="submit" value="ok" class="solid">确认写入</button>
+    </menu>
+  </form>
+</dialog>
+
+<div id="toasts" class="toasts" aria-live="polite"></div>
+
+<script type="module" src="/app.js"></script>
+</body>
+</html>

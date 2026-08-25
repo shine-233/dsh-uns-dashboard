@@ -1,0 +1,16 @@
+{
+  "name": "dsh-uns-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "UNS 控制台：工业统一命名空间实时监控面板（mock / supOS / UMH）",
+  "scripts": {
+    "start": "node server/index.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "optionalDependencies": {
+    "dsh-uns": "github:shine-233/dsh-uns"
+  }
+}
